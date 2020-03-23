@@ -1,14 +1,12 @@
-from time import clock, monotonic
-
 import torch
 
-import datetime
-from time import sleep
+x = torch.tensor(
+    [[1., 2., 3., 4.],
+     [5., 6., 7., 8.],
+     [9., 10., 11., 12.]], requires_grad=True)
 
-a = datetime.datetime.now()
+function = 10 * (x ** 2).sum()
 
-x = torch.rand([2000, 3000])
-y = (x - x + x * 10.0) ** 2
-b = datetime.datetime.now()
-delta = b - a
-print(delta.microseconds)
+function.backward()
+
+print(x.grad, '<- gradient')
